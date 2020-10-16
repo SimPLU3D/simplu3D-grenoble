@@ -32,6 +32,12 @@ Pour lancer l'éxécutable généré à l'étape précédente , il faut se posit
 Le code se déclenche sur les parcelles dont l'attribut SIMUL vaut 1.
 
 
+
+### Selection des parcelles à simuler 
+
+l'attribut SIMUL de la couche shapefile parcel.shp du repertoire data/test/ indique si on simule un bâtiment sur la parcelle (1) ou si la parcelle est laissée vide (0)
+
+
 ### Résultats
 
 
