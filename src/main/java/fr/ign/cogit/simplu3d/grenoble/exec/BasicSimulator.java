@@ -156,6 +156,8 @@ public class BasicSimulator {
 
 		// Run of the optimisation on a parcel with the predicate
 		GraphConfiguration<Cuboid> cc = oCB.process(bPU, p, env, 1, pred);
+		// make sure the output directory exists
+		new File(p.get("result").toString()).mkdirs();
 		//Writting the output
 		SaveGeneratedObjects.saveShapefile( p.get("result").toString() + "out_"+bPU.getCadastralParcels().get(0).getCode()+".shp", cc, bPU.getId(), 0);
 		
