@@ -31,6 +31,35 @@ Pour lancer l'éxécutable généré à l'étape précédente , il faut se posit
 ```
 Le code se déclenche sur les parcelles dont l'attribut SIMUL vaut 1.
 
+### Paramétrage des règles.
+
+Il est possible de paramétrer les valeurs de règles dans la ligne de commande en ajoutant **-nom_attribut valeur**
+
+Dans la version actuelle, il est possible de modifier les paramètres suivants.
+
+| Nom de l'attribut | Rôle | Valeur par défaut |
+|-------------------|------|-------------------|
+|distReculVoirie    | Recul par rapport à la voirie     |     0.0              |
+|distReculFond                   |Recul par rapport à la bordure de fond de parcelle      |0.0                   |
+|distReculLat                   |Recul par rapport à la bordure latérale de parcelle      |0.0                   |
+|distInterBati                   |Distance interbat      |0.0                   |
+|maximalCES                   |CES maximum     |0.6                   |
+
+
+On peut ainsi modifier les paramètres de la manière suivante :
+```
+#> java -jar simplu3d-grenoble-1.0-SNAPSHOT-shaded.jar -maximalCES 1.0 -distReculVoirie 5.0
+```
+Les paramètres non spécifiés prennent la valeur par défaut. Un petit texte précise dans la fenêtre de commande les valeurs utilisées :
+``
+Les règles sont : 
+Distance de recul à la voirie : 5.0
+Distance de recul au fond de parcel : 0.0
+Distance de recul latéral : 0.0
+Distance de recul entre bâtiments : 0.0
+CES max : 1.0
+``
+
 
 ### Résultats
 
