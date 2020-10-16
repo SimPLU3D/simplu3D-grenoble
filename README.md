@@ -61,6 +61,12 @@ CES max : 1.0
 ``
 
 
+
+### Selection des parcelles à simuler 
+
+l'attribut SIMUL de la couche shapefile parcel.shp du repertoire data/test/ indique si on simule un bâtiment sur la parcelle (1) ou si la parcelle est laissée vide (0)
+
+
 ### Résultats
 
 
