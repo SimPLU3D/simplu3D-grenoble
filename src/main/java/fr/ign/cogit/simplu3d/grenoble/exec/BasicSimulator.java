@@ -50,35 +50,7 @@ public class BasicSimulator {
 	  String folderName = "./scenario/";
 		String fileName = "building_parameters.json";
 		SimpluParameters p = new SimpluParametersJSON(new File(folderName + fileName));
-
-		System.out.println(p.get("result").toString());
 		
-		// Load default environment (data are in resource directory)
-		Environnement env = LoaderSHP.loadNoDTM(new File("./data/test"));
-
-		System.out.println(env.getBpU().size() + " bpus");
-		System.out.println(env.getCadastralParcels().size() + " parcels");
-		System.out.println(env.getBuildings().size() + " buildings");
-		// Select a parcel on which generation is proceeded
-		BasicPropertyUnit bPU = null;
-		for (BasicPropertyUnit b : env.getBpU()) {
-		  for (CadastralParcel c : b.getCadastralParcels()) {
-		    if (c.getCode().equals("18525")) {
-		      bPU = b;
-		      break;
-		    }
-		  }
-		  if (bPU != null) break;
-		}
-		if (bPU == null) {
-		  System.out.println("Parcel not found");
-		  System.exit(0);
-		}
-
-		System.out.println(bPU.getPol2D());
-		// Instantiation of the sampler
-		OptimisedBuildingsCuboidFinalDirectRejection oCB = new OptimisedBuildingsCuboidFinalDirectRejection();
-
 		// Rules parameters.8
 		// Distance to road
 		double distReculVoirie = 0;
@@ -91,14 +63,45 @@ public class BasicSimulator {
 		// Maximal ratio built area
 		double maximalCES = 0.6;
 
+		System.out.println(p.get("result").toString());
+		
+		// Load default environment (data are in resource directory)
+		Environnement env = LoaderSHP.loadNoDTM(new File("./data/test"));
+
+		System.out.println(env.getBpU().size() + " bpus");
+		System.out.println(env.getCadastralParcels().size() + " parcels");
+		System.out.println(env.getBuildings().size() + " buildings");
+		// Select a parcel on which generation is proceeded
+		
+		for (BasicPropertyUnit b : env.getBpU()) {
+		  for (CadastralParcel c : b.getCadastralParcels()) {
+		    if (c.hasToBeSimulated()) {
+		      simulateAndSave(b, env, p, distReculVoirie,  distReculFond,  distanceInterBati,  distReculLat, maximalCES);
+		    }
+		  }
+		}
+	
+
+
+
+		
+	}
+	
+	private static void simulateAndSave(BasicPropertyUnit bPU, Environnement env, SimpluParameters p, double distReculVoirie,  double distReculFond, double distanceInterBat, double distReculLat, double maximalCES) throws Exception {
+
+		System.out.println(bPU.getPol2D());
+		// Instantiation of the sampler
+		OptimisedBuildingsCuboidFinalDirectRejection oCB = new OptimisedBuildingsCuboidFinalDirectRejection();
+
+		
 		// Instantiation of the rule checker
 		SamplePredicate<Cuboid, GraphConfiguration<Cuboid>, BirthDeathModification<Cuboid>> pred = new SamplePredicate<>(
-				bPU, distReculVoirie, distReculFond, distReculLat, distanceInterBati, maximalCES);
+				bPU, distReculVoirie, distReculFond, distReculLat, distanceInterBat, maximalCES);
 
 		// Run of the optimisation on a parcel with the predicate
 		GraphConfiguration<Cuboid> cc = oCB.process(bPU, p, env, 1, pred);
 		//Writting the output
-		SaveGeneratedObjects.saveShapefile( p.get("result").toString() + "out.shp", cc, bPU.getId(), 0);
+		SaveGeneratedObjects.saveShapefile( p.get("result").toString() + "out_"+bPU.getCadastralParcels().get(0).getCode()+".shp", cc, bPU.getId(), 0);
 		
 	}
 

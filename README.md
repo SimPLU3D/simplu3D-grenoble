@@ -29,6 +29,7 @@ Pour lancer l'éxécutable généré à l'étape précédente , il faut se posit
 ```
 #> java -jar target/simplu3d-grenoble-1.0-SNAPSHOT-shaded.jar
 ```
+Le code se déclenche sur les parcelles dont l'attribut SIMUL vaut 1.
 
 
 ### Résultats
