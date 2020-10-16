@@ -112,11 +112,11 @@ public class BasicSimulator {
 		// Load default environment (data are in resource directory)
 		Environnement env = LoaderSHP.loadNoDTM(new File("./data/test"));
 
-		System.out.println(env.getBpU().size() + " bpus");
-		System.out.println(env.getCadastralParcels().size() + " parcels");
-		System.out.println(env.getBuildings().size() + " buildings");
+//		System.out.println(env.getBpU().size() + " bpus");
+//		System.out.println(env.getCadastralParcels().size() + " parcels");
+//		System.out.println(env.getBuildings().size() + " buildings");
 		// Select a parcel on which generation is proceeded
-		
+//		env.getBuildings().clear();
 		for (BasicPropertyUnit b : env.getBpU()) {
 		  for (CadastralParcel c : b.getCadastralParcels()) {
 		    if (c.hasToBeSimulated()) {
