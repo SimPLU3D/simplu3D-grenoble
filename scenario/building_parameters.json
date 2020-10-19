@@ -31,7 +31,7 @@
 	"ponderation_volume": "1",
 	"csvfilenamend": "exportEndStats.csv",
 	"pdeath": "0.5",
-	"result": "\/tmp\/",
+	"result": ".\/results\/",
 	"statsvisitor": "false",
 	"relative_nb_iter": "100000",
 	"minheight": "3",
