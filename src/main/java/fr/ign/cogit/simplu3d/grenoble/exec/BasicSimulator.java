@@ -1,3 +1,4 @@
+
 package fr.ign.cogit.simplu3d.grenoble.exec;
 
 import java.io.File;
@@ -53,8 +54,8 @@ public class BasicSimulator {
 		// Loading of configuration file that contains sampling space
 		// information and simulated annealing configuration
 //		String folderName = BasicSimulator.class.getClassLoader().getResource("scenario/").getPath();
-	  String folderName = "./scenario/";
-		String fileName = "building_parameters.json";
+    	  String folderName = "./scenario/";
+		String fileName = "building_parameters_aurg.json";
 		SimpluParameters p = new SimpluParametersJSON(new File(folderName + fileName));
 		
 		// Rules parameters.8
